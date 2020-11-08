@@ -1,0 +1,14 @@
+@use '../../styles/config';
+
+.widget {
+  display: block;
+  width: 100%;
+  background-color: config.$main-bg;
+  border: 1px solid config.$border-color;
+
+  &__title {
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid config.$border-color;
+  }
+}

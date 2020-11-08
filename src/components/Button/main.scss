@@ -1,0 +1,37 @@
+@use '../../styles/config';
+
+.btn {
+  display: block;
+  border: 0;
+  background-color: inherit;
+  cursor: pointer;
+
+  &--primary {
+    background-color: config.$main-accent;
+    color: config.$main-txt-color;
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    font-size: 1.2rem;
+
+    &:hover {
+      background: fade-out(config.$main-accent, 0.2);
+    }
+  }
+
+  &--currency {
+    font-size: 2rem;
+    color: config.$main-txt-color;
+
+    &:hover {
+      color: fade-out(config.$main-txt-color, 0.2);
+    }
+  }
+
+  &--display {
+    background-color: config.$white;
+    color: config.$main-accent;
+    padding: 10px 15px;
+    border-radius: 20px;
+  }
+}

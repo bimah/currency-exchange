@@ -1,0 +1,115 @@
+{
+  "name": "currency-exchange",
+  "version": "1.0.0",
+  "description": "Currency Exchange",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage --watchAll --no-cache",
+    "start": "cross-env NODE_ENV=development webpack-dev-server  --config webpack.config.dev.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
+    "lint": "eslint . --ext .js --cache"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bimah/currency-exchange.git"
+  },
+  "author": "Matteo Corazzin",
+  "license": "ISC",
+  "engines": {
+    "node": "~12.16.1",
+    "npm": "~6.13.4"
+  },
+  "homepage": "https://github.com/bimah/currency-exchange/blob/develop/README.md",
+  "devDependencies": {
+    "@babel/core": "7.11.6",
+    "@babel/preset-env": "7.11.5",
+    "@babel/preset-react": "7.10.4",
+    "@testing-library/jest-dom": "5.11.4",
+    "@testing-library/react": "11.0.2",
+    "babel-eslint": "10.1.0",
+    "babel-jest": "26.3.0",
+    "babel-loader": "8.1.0",
+    "camelcase": "6.0.0",
+    "clean-webpack-plugin": "3.0.0",
+    "copy-webpack-plugin": "^6.3.0",
+    "cross-env": "7.0.2",
+    "css-loader": "^5.0.1",
+    "eslint": "7.2.0",
+    "eslint-config-airbnb": "18.2.0",
+    "eslint-loader": "4.0.2",
+    "eslint-plugin-import": "2.22.0",
+    "eslint-plugin-jsx-a11y": "6.3.1",
+    "eslint-plugin-react": "7.20.6",
+    "eslint-plugin-react-hooks": "4.0.0",
+    "eslint-plugin-testing-library": "3.8.0",
+    "fibers": "^5.0.0",
+    "html-webpack-plugin": "4.4.1",
+    "identity-obj-proxy": "3.0.0",
+    "jest": "26.4.2",
+    "jest-watch-typeahead": "0.6.1",
+    "postcss-loader": "^4.0.4",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.0.5",
+    "style-loader": "^2.0.0",
+    "stylelint": "^13.7.2",
+    "stylelint-config-sass-guidelines": "^7.1.0",
+    "stylelint-scss": "^3.18.0",
+    "stylelint-webpack-plugin": "^2.1.1",
+    "svg-url-loader": "^6.0.0",
+    "webpack": "4.44.1",
+    "webpack-cli": "3.3.12",
+    "webpack-dev-server": "3.11.0"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "prop-types": "^15.7.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
+      "^.+\\.module\\.(css|sass|scss)$"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+      "\\.svg": "<rootDir>/config/jest/SVGMock.js"
+    },
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "web.ts",
+      "ts",
+      "web.tsx",
+      "tsx",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node"
+    ],
+    "watchPlugins": [
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
+
+import styles from './main.scss';
+
+const cx = classNames.bind(styles);
+
+const Button = ({ btnStyle, handleClick, label }) => (
+  <button className={cx('btn', { [`btn--${btnStyle}`]: true })} type="button" onClick={handleClick}>{label}</button>
+);
+
+Button.propTypes = {
+  btnStyle: PropTypes.string,
+  handleClick: PropTypes.func,
+  label: PropTypes.string.isRequired
+};
+
+Button.defaultProps = {
+  btnStyle: 'primary',
+  handleClick: () => {}
+};
+
+export default Button;

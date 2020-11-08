@@ -1,0 +1,20 @@
+{
+  "general": {
+    "language": "en",
+    "defaultCurrency": "GBP"
+  },
+  "accounts": [
+    {
+      "currency": "GBP",
+      "balance": 50
+    },
+    {
+      "currency": "EUR",
+      "balance": 50
+    },
+    {
+      "currency": "USD",
+      "balance": 50
+    }
+  ]
+}

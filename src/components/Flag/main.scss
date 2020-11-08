@@ -1,0 +1,10 @@
+@use '../../styles/config';
+
+.flag {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  overflow: hidden;
+  filter: drop-shadow(0 0 0.3rem config.$black);
+}
