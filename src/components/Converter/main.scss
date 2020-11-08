@@ -11,6 +11,13 @@
     &__additional {
       position: absolute;
       top: calc(50% - 17px);
+      text-align: center;
+      width: 100%;
+
+      &--toggle {
+        position: absolute;
+        left: 20px;
+      }
     }
 
     &__action {

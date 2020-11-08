@@ -1,7 +1,7 @@
 @use '../../styles/config';
 
 .btn {
-  display: block;
+  display: inline-block;
   border: 0;
   background-color: inherit;
   cursor: pointer;
@@ -22,16 +22,48 @@
   &--currency {
     font-size: 2rem;
     color: config.$main-txt-color;
+    padding-right: 20px;
+    position: relative;
+
+    &::after {
+      content: '';
+      background: url('../../../images/icons/down-chevron.svg') center center no-repeat;
+      position: absolute;
+      height: 100%;
+      width: 15px;
+      top: 0;
+      right: 0;
+    }
 
     &:hover {
       color: fade-out(config.$main-txt-color, 0.2);
+
+      &::after {
+        opacity: 0.8;
+      }
+
     }
   }
 
   &--display {
-    background-color: config.$white;
+    background-color: config.$main-txt-color;
     color: config.$main-accent;
     padding: 10px 15px;
     border-radius: 20px;
+
+    &:hover {
+      background-color: fade-out(config.$main-txt-color, 0.2);
+    }
+  }
+
+  &--toggle {
+    background: config.$main-txt-color url('../../../images/icons/switch.svg') center center no-repeat;
+    border-radius: 20px;
+    width: 35px;
+    height: 35px;
+
+    &:hover {
+      background-color: fade-out(config.$main-txt-color, 0.2);
+    }
   }
 }

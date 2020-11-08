@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+import { useExchangeState } from '../../utils/exchange-context';
 
 import styles from './main.scss';
 import Currency from '../../utils/currency';
@@ -16,6 +17,7 @@ const CurrencyDisplay = ({
   handleCurrencyChange,
   amount
 }) => {
+  const { language } = useExchangeState();
   const [inputValue, setInputValue] = useState(amount || '');
 
   useEffect(() => {
@@ -40,10 +42,10 @@ const CurrencyDisplay = ({
         <div className={styles['currency-display__main-currency']}>
           <div>
             <Button label={pocket.currency} btnStyle="currency" handleClick={handleCurrencyChange} />
-            <p>{`Balance: ${Currency.format('en', pocket.currency, pocket.balance)}`}</p>
+            <p>{`Balance: ${Currency.format(language, pocket.currency, pocket.balance)}`}</p>
           </div>
           <div className={styles['currency-display__value']}>
-            <input className={cx('currency-input', { 'currency-input--over': overBalance })} type="text" placeholder={0} value={addPre(inputValue)} onInput={onInputChange} />
+            <input className={cx('currency-input', { 'currency-input--over': overBalance })} type="text" placeholder={0} value={addPre(inputValue)} onChange={onInputChange} />
             {overBalance ? <p className={styles['currency-display__value--over']}>exceed balance</p> : null}
           </div>
         </div>

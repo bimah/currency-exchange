@@ -13,12 +13,13 @@ const Button = ({ btnStyle, handleClick, label }) => (
 Button.propTypes = {
   btnStyle: PropTypes.string,
   handleClick: PropTypes.func,
-  label: PropTypes.string.isRequired
+  label: PropTypes.string
 };
 
 Button.defaultProps = {
   btnStyle: 'primary',
-  handleClick: () => {}
+  handleClick: () => {},
+  label: ''
 };
 
 export default Button;
