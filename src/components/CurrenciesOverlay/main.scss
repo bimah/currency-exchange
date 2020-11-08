@@ -1,0 +1,45 @@
+@use '../../styles/config';
+
+.currencies-overlay {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: config.$main-overlay-bg;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  border-top: 1px solid config.$gray-light;
+  transition: all 1s ease 0s;
+
+  ul {
+    list-style: none;
+  }
+
+  &--open {
+    top: 0;
+  }
+
+  &__header {
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid config.$border-color;
+    position: relative;
+
+    &--close {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+    }
+  }
+
+  &__content {
+    padding: 20px;
+    height: 100%;
+    overflow: scroll;
+
+    &-recent {
+      padding-bottom: 15px;
+    }
+  }
+}

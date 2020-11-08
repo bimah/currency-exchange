@@ -71,4 +71,14 @@
       background-color: fade-out(config.$main-txt-color, 0.2);
     }
   }
+
+  &--close {
+    background: url('../../../images/icons/close.svg') center center no-repeat;
+    width: 35px;
+    height: 35px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 }

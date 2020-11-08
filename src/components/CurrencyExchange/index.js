@@ -1,22 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ExchangeProvider } from '../../utils/exchange-context';
 
 import Converter from '../Converter';
+import CurrenciesOverlay from '../CurrenciesOverlay';
 
 import styles from './main.scss';
 
-const CurrencyExchange = () => (
-  <ExchangeProvider>
-    <div className={styles['currency-exchange']}>
-      <div className={styles['currency-exchange__main']}>
-        <Converter />
-        {/* pocketFrom={fromAccount} pocketTo={toAccount} rate={1.5} /> */}
+const CurrencyExchange = () => {
+  const [openOverlay, setOpenOverlay] = useState(true);
+  return (
+    <ExchangeProvider>
+      <div className={styles['currency-exchange']}>
+        <div className={styles['currency-exchange__main']}>
+          <Converter />
+        </div>
+        <CurrenciesOverlay title="Choose currency" isOpen={openOverlay} onClose={() => setOpenOverlay(false)} />
       </div>
-      <div className={styles['currency-exchange__over']}>
-        <p>over</p>
-      </div>
-    </div>
-  </ExchangeProvider>
-);
+    </ExchangeProvider>
+  );
+};
 
 export default CurrencyExchange;

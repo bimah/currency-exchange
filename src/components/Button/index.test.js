@@ -28,3 +28,10 @@ test('Button to render style correctly', () => {
   );
   expect(getByTestId('button').classList.contains('btn--currency'));
 });
+
+test('Disable Button', () => {
+  const { getByTestId } = render(
+    <Button disabled label={label} />
+  );
+  expect(getByTestId('button').disabled).toBeTruthy();
+});

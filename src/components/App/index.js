@@ -3,18 +3,12 @@ import styles from './main.scss';
 
 import Widget from '../Widget';
 import CurrencyExchange from '../CurrencyExchange';
-import Flag from '../Flag';
-import Pocket from '../Pocket';
-
-import userData from '../../../settings/user-details.json';
 
 const App = () => (
   <div className={styles.app}>
     <Widget title="Exchange">
-      <CurrencyExchange userData={userData} />
+      <CurrencyExchange />
     </Widget>
-    <Flag currencyCode="USD" />
-    <Pocket currencyCode="GBP" currencyName="British Pound Sterling" />
   </div>
 );
 

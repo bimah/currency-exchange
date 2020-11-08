@@ -1,4 +1,10 @@
-import React from 'react';
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  useCallback,
+  useEffect
+} from 'react';
 import PropTypes from 'prop-types';
 
 import UserData from '../../settings/user-details.json';
@@ -6,8 +12,8 @@ import Request from './requst';
 
 const { accounts, general } = UserData;
 
-const ExchangeStateContext = React.createContext();
-const ExchangeDispatchContext = React.createContext();
+const ExchangeStateContext = createContext();
+const ExchangeDispatchContext = createContext();
 
 const initialState = {
   accounts,
@@ -63,15 +69,15 @@ const ExchangeReducer = (state, action) => {
 };
 
 const ExchangeProvider = ({ children }) => {
-  const [state, dispatch] = React.useReducer(ExchangeReducer, initialState);
+  const [state, dispatch] = useReducer(ExchangeReducer, initialState);
 
-  const getRate = async (currency) => {
+  const getRate = async currency => {
     const currentRate = await Request.get('https://api.exchangeratesapi.io/latest', { base: currency })
       .catch(error => console.log(error));
     return currentRate;
   };
 
-  const onReloadRate = React.useCallback(async (from, to) => {
+  const onReloadRate = useCallback(async (from, to) => {
     const rateData = await getRate(from);
     dispatch({
       type: 'updateRate',
@@ -79,7 +85,7 @@ const ExchangeProvider = ({ children }) => {
     });
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     onReloadRate(state.fromAccount.currency, state.toAccount.currency);
   }, [state.fromAccount.currency, state.toAccount.currency]);
 
@@ -97,7 +103,7 @@ ExchangeProvider.propTypes = {
 };
 
 const useExchangeState = () => {
-  const context = React.useContext(ExchangeStateContext);
+  const context = useContext(ExchangeStateContext);
   if (context === undefined) {
     throw new Error('useExchangeState must be use within a ExchangeProvider');
   }
@@ -105,7 +111,7 @@ const useExchangeState = () => {
 };
 
 const useExchangeDispatch = () => {
-  const context = React.useContext(ExchangeDispatchContext);
+  const context = useContext(ExchangeDispatchContext);
   if (context === undefined) {
     throw new Error('useExchangeDispatch must be use within a ExchangeProvider');
   }
