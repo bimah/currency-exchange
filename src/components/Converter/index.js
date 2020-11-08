@@ -78,7 +78,7 @@ const Converter = () => {
         </div>
       </div>
       <div className={styles['converter--content__action']}>
-        <Button label="Exchange" handleClick={handleUpdateAccounts} />
+        <Button label="Exchange" handleClick={handleUpdateAccounts} disabled={!rate || from > fromAccount.balance} />
       </div>
     </div>
   );

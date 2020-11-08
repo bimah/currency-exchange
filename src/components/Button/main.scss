@@ -6,6 +6,11 @@
   background-color: inherit;
   cursor: pointer;
 
+  &:disabled {
+    opacity: 0.5;
+    cursor: initial;
+  }
+
   &--primary {
     background-color: config.$main-accent;
     color: config.$main-txt-color;
