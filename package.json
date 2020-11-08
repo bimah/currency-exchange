@@ -71,6 +71,9 @@
     "roots": [
       "<rootDir>/src"
     ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 90,

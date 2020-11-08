@@ -7,7 +7,7 @@ import styles from './main.scss';
 const cx = classNames.bind(styles);
 
 const Button = ({ btnStyle, handleClick, label }) => (
-  <button className={cx('btn', { [`btn--${btnStyle}`]: true })} type="button" onClick={handleClick}>{label}</button>
+  <button className={cx('btn', { [`btn--${btnStyle}`]: true })} type="button" onClick={handleClick} data-testid="button">{label}</button>
 );
 
 Button.propTypes = {
