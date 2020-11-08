@@ -1,6 +1,5 @@
 module.exports = api => {
   const presets = [
-    '@babel/preset-react',
     ['@babel/preset-env', {
       modules: process.env.NODE_ENV === 'test' ? 'auto' : false,
       useBuiltIns: 'usage',
@@ -10,6 +9,7 @@ module.exports = api => {
         esmodules: true
       }
     }],
+    '@babel/preset-react'
   ];
 
   const plugins = [];

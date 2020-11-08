@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useExchangeState, useExchangeDispatch } from '../../utils/exchange-context';
 
@@ -20,10 +20,41 @@ const Converter = () => {
   const [from, setFrom] = useState(0);
   const [to, setTo] = useState(0);
 
-  const onInputChange = (value, add) => (
-    add
-      ? setFrom(parseFloat(Currency.sortDecimal(value / rate, 2)))
-      : setTo(parseFloat(Currency.sortDecimal(value * rate, 2))));
+  const onInputChange = (value, add) => {
+    if (add) {
+      setFrom(parseFloat(Currency.sortDecimal(value / rate, 2)));
+      setTo(parseFloat(value));
+    } else {
+      setTo(parseFloat(Currency.sortDecimal(value * rate, 2)));
+      setFrom(parseFloat(value));
+    }
+  };
+
+  useEffect(() => {
+    onInputChange(from, false);
+  }, [rate]);
+
+  const posToNeg = num => -Math.abs(num);
+
+  const handleUpdateAccounts = () => {
+    dispatch({
+      type: 'updateAccounts',
+      data: {
+        transfers: [
+          {
+            currency: fromAccount.currency,
+            amount: posToNeg(from)
+          },
+          {
+            currency: toAccount.currency,
+            amount: to
+          }
+        ]
+      }
+    });
+    setFrom(0);
+    setTo(0);
+  };
 
   return (
     <div className={styles.converter}>
@@ -47,7 +78,7 @@ const Converter = () => {
         </div>
       </div>
       <div className={styles['converter--content__action']}>
-        <Button label="Exchange" />
+        <Button label="Exchange" handleClick={handleUpdateAccounts} />
       </div>
     </div>
   );
