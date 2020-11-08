@@ -35,7 +35,7 @@
 
   &__content {
     padding: 20px;
-    height: 100%;
+    height: calc(100% - 49px - 37px);
     overflow: scroll;
 
     &-recent {
