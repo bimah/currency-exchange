@@ -27,7 +27,7 @@ module.exports = {
       ]
     }),
     new HtmlWebpackPlugin({
-      title: 'Share components',
+      title: 'Currency Exchange',
       template: 'index.html'
     }),
     new StyleLintPlugin({
