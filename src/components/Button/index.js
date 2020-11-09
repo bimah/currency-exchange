@@ -12,7 +12,16 @@ const Button = ({
   label,
   disabled
 }) => (
-  <button className={cx('btn', { [`btn--${btnStyle}`]: true })} type="button" onClick={handleClick} disabled={disabled} data-testid="button">{label}</button>
+  <button
+    className={cx('btn', { [`btn--${btnStyle}`]: true })}
+    type="button"
+    onClick={handleClick}
+    disabled={disabled}
+    data-testid="button"
+    title={btnStyle}
+  >
+    {label}
+  </button>
 );
 
 Button.propTypes = {

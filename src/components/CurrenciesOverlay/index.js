@@ -18,8 +18,9 @@ const CurrenciesOverlay = ({
   onClose,
   accountType
 }) => {
-  const { accounts } = useExchangeState();
+  const { accounts, toAccount, fromAccount } = useExchangeState();
   const dispatch = useExchangeDispatch();
+
   const otherPockets = (existing, fullList) => {
     const existingIds = existing.map(ex => ex.currency);
     const filteredList = { ...fullList };
@@ -37,6 +38,9 @@ const CurrenciesOverlay = ({
     });
     onClose();
   };
+
+  const disableCurrency = accountType === 'to' ? fromAccount.currency : toAccount.currency;
+
   return (
     <div className={cx('currencies-overlay', { 'currencies-overlay--open': isOpen })}>
       <div className={styles['currencies-overlay__header']}>
@@ -56,6 +60,7 @@ const CurrenciesOverlay = ({
                   amount={account.balance}
                   currencyName={Currency[account.currency]}
                   handleCurrencyClick={changeAccount}
+                  disabled={account.currency === disableCurrency}
                 />
               </li>
             ))}
@@ -72,6 +77,7 @@ const CurrenciesOverlay = ({
                     amount={0}
                     currencyName={value}
                     handleCurrencyClick={changeAccount}
+                    disabled={key === disableCurrency}
                   />
                 </li>
               ))

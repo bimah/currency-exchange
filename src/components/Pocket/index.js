@@ -9,9 +9,10 @@ const Pocket = ({
   currencyCode,
   amount,
   currencyName,
-  handleCurrencyClick
+  handleCurrencyClick,
+  disabled
 }) => (
-  <button type="button" className={styles.pocket} onClick={() => handleCurrencyClick(currencyCode)}>
+  <button type="button" className={styles.pocket} onClick={() => handleCurrencyClick(currencyCode)} disabled={disabled}>
     <div className={styles['pocket--flag']}>
       <Flag currencyCode={currencyCode} />
     </div>
@@ -26,12 +27,14 @@ Pocket.propTypes = {
   currencyCode: PropTypes.string.isRequired,
   amount: PropTypes.number,
   currencyName: PropTypes.string.isRequired,
-  handleCurrencyClick: PropTypes.func
+  handleCurrencyClick: PropTypes.func,
+  disabled: PropTypes.bool
 };
 
 Pocket.defaultProps = {
   amount: 0,
-  handleCurrencyClick: () => {}
+  handleCurrencyClick: () => {},
+  disabled: false
 };
 
 export default Pocket;
