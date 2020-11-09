@@ -7,14 +7,19 @@ import CurrenciesOverlay from '../CurrenciesOverlay';
 import styles from './main.scss';
 
 const CurrencyExchange = () => {
-  const [openOverlay, setOpenOverlay] = useState(true);
+  const [openOverlay, setOpenOverlay] = useState(false);
+  const [account, setAccount] = useState(null);
+  const handleOpenOverlay = acc => {
+    setAccount(acc);
+    setOpenOverlay(true);
+  };
   return (
     <ExchangeProvider>
       <div className={styles['currency-exchange']}>
         <div className={styles['currency-exchange__main']}>
-          <Converter />
+          <Converter onCurrencyChange={handleOpenOverlay} />
         </div>
-        <CurrenciesOverlay title="Choose currency" isOpen={openOverlay} onClose={() => setOpenOverlay(false)} />
+        <CurrenciesOverlay title="Choose currency" isOpen={openOverlay} accountType={account} onClose={() => setOpenOverlay(false)} />
       </div>
     </ExchangeProvider>
   );

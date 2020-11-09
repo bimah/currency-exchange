@@ -37,6 +37,9 @@ const ExchangeReducer = (state, action) => {
       const { transfers } = action.data;
       let newAccounts = state.accounts;
       transfers.forEach(transfer => {
+        if (newAccounts.filter(acc => acc.currency === transfer.currency).length === 0) {
+          newAccounts.push({ currency: transfer.currency, balance: transfer.amount });
+        }
         newAccounts = newAccounts.map(acc => {
           const updatedBalance = acc.currency === transfer.currency
             ? acc.balance += transfer.amount
@@ -63,6 +66,15 @@ const ExchangeReducer = (state, action) => {
     }
     case 'updateRate': {
       return { ...state, ...{ rate: action.data } };
+    }
+    case 'updateAccount': {
+      const { account, currency } = action.data;
+      const [selectedAccount] = state.accounts.filter(acc => acc.currency === currency);
+      const pocket = selectedAccount || { currency, balance: 0 };
+      if (account === 'to') {
+        return { ...state, ...{ toAccount: pocket } };
+      }
+      return { ...state, ...{ fromAccount: pocket } };
     }
     default:
       throw new Error(`Unhandles action type: ${action.type}`);

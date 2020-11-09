@@ -15,7 +15,7 @@ const CurrencyDisplay = ({
   add,
   handleInputChange,
   handleCurrencyChange,
-  amount
+  amount,
 }) => {
   const { language } = useExchangeState();
   const [inputValue, setInputValue] = useState(amount || '');
@@ -41,7 +41,7 @@ const CurrencyDisplay = ({
       <div className={styles['currency-display__main']}>
         <div className={styles['currency-display__main-currency']}>
           <div>
-            <Button label={pocket.currency} btnStyle="currency" handleClick={handleCurrencyChange} />
+            <Button label={pocket.currency} btnStyle="currency" handleClick={() => handleCurrencyChange(add ? 'to' : 'from')} />
             <p>{`Balance: ${Currency.format(language, pocket.currency, pocket.balance)}`}</p>
           </div>
           <div className={styles['currency-display__value']}>
@@ -62,14 +62,14 @@ CurrencyDisplay.propTypes = {
   add: PropTypes.bool,
   handleInputChange: PropTypes.func,
   handleCurrencyChange: PropTypes.func,
-  amount: PropTypes.number
+  amount: PropTypes.number,
 };
 
 CurrencyDisplay.defaultProps = {
   amount: null,
   add: true,
   handleInputChange: () => {},
-  handleCurrencyChange: () => {}
+  handleCurrencyChange: () => {},
 };
 
 export default CurrencyDisplay;

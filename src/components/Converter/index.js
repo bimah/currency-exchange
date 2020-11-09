@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import { useExchangeState, useExchangeDispatch } from '../../utils/exchange-context';
 
@@ -9,7 +10,7 @@ import Currency from '../../utils/currency';
 
 import styles from './main.scss';
 
-const Converter = () => {
+const Converter = ({ onCurrencyChange }) => {
   const {
     fromAccount,
     toAccount,
@@ -65,6 +66,7 @@ const Converter = () => {
             add={false}
             handleInputChange={onInputChange}
             amount={from}
+            handleCurrencyChange={onCurrencyChange}
           />
         </div>
         <div className={styles['converter--content__additional']}>
@@ -74,7 +76,12 @@ const Converter = () => {
           <Button btnStyle="display" label={`${Currency.format(language, fromAccount.currency, 1)} = ${Currency.format(language, toAccount.currency, 1 * rate)}`} />
         </div>
         <div className={styles['converter--content__to']}>
-          <CurrencyDisplay pocket={toAccount} handleInputChange={onInputChange} amount={to} />
+          <CurrencyDisplay
+            pocket={toAccount}
+            handleInputChange={onInputChange}
+            amount={to}
+            handleCurrencyChange={onCurrencyChange}
+          />
         </div>
       </div>
       <div className={styles['converter--content__action']}>
@@ -82,6 +89,14 @@ const Converter = () => {
       </div>
     </div>
   );
+};
+
+Converter.propTypes = {
+  onCurrencyChange: PropTypes.func
+};
+
+Converter.defaultProps = {
+  onCurrencyChange: () => {}
 };
 
 export default Converter;

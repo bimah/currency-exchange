@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
-import { useExchangeState } from '../../utils/exchange-context';
+import { useExchangeState, useExchangeDispatch } from '../../utils/exchange-context';
 import Currency from '../../../settings/currencies.json';
 
 import Button from '../Button';
@@ -15,14 +15,27 @@ const cx = classNames.bind(styles);
 const CurrenciesOverlay = ({
   title,
   isOpen,
-  onClose
+  onClose,
+  accountType
 }) => {
   const { accounts } = useExchangeState();
+  const dispatch = useExchangeDispatch();
   const otherPockets = (existing, fullList) => {
     const existingIds = existing.map(ex => ex.currency);
     const filteredList = { ...fullList };
     existingIds.forEach(id => delete filteredList[id]);
     return filteredList;
+  };
+
+  const changeAccount = currency => {
+    dispatch({
+      type: 'updateAccount',
+      data: {
+        account: accountType,
+        currency
+      }
+    });
+    onClose();
   };
   return (
     <div className={cx('currencies-overlay', { 'currencies-overlay--open': isOpen })}>
@@ -42,6 +55,7 @@ const CurrenciesOverlay = ({
                   currencyCode={account.currency}
                   amount={account.balance}
                   currencyName={Currency[account.currency]}
+                  handleCurrencyClick={changeAccount}
                 />
               </li>
             ))}
@@ -57,6 +71,7 @@ const CurrenciesOverlay = ({
                     currencyCode={key}
                     amount={0}
                     currencyName={value}
+                    handleCurrencyClick={changeAccount}
                   />
                 </li>
               ))
@@ -71,13 +86,15 @@ const CurrenciesOverlay = ({
 CurrenciesOverlay.propTypes = {
   title: PropTypes.string,
   isOpen: PropTypes.bool,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  accountType: PropTypes.string
 };
 
 CurrenciesOverlay.defaultProps = {
   title: null,
   isOpen: false,
-  onClose: () => {}
+  onClose: () => {},
+  accountType: null
 };
 
 export default CurrenciesOverlay;
