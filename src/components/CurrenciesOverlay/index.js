@@ -18,6 +18,12 @@ const CurrenciesOverlay = ({
   onClose
 }) => {
   const { accounts } = useExchangeState();
+  const otherPockets = (existing, fullList) => {
+    const existingIds = existing.map(ex => ex.currency);
+    const filteredList = { ...fullList };
+    existingIds.forEach(id => delete filteredList[id]);
+    return filteredList;
+  };
   return (
     <div className={cx('currencies-overlay', { 'currencies-overlay--open': isOpen })}>
       <div className={styles['currencies-overlay__header']}>
@@ -45,7 +51,7 @@ const CurrenciesOverlay = ({
           <h3>Other</h3>
           <ul>
             {
-              Object.entries(Currency).map(([key, value]) => (
+              Object.entries(otherPockets(accounts, Currency)).map(([key, value]) => (
                 <li key={key}>
                   <Pocket
                     currencyCode={key}

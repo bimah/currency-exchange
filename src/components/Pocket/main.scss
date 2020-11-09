@@ -1,7 +1,18 @@
+@use '../../styles/config';
+
 .pocket {
   display: flex;
   align-items: center;
   padding: 15px 0;
+  background: none;
+  border: 0;
+  text-align: left;
+  color: config.$main-txt-color;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.6;
+  }
 
   &--flag {
     margin-right: 10px;

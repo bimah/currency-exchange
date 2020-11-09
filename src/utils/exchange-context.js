@@ -15,6 +15,7 @@ const { accounts, general } = UserData;
 const ExchangeStateContext = createContext();
 const ExchangeDispatchContext = createContext();
 
+// TODO Set toAccount to first available currency if no accounts
 const initialState = {
   accounts,
   language: general.language,

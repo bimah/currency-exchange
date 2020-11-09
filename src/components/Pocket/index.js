@@ -6,7 +6,7 @@ import styles from './main.scss';
 import Flag from '../Flag';
 
 const Pocket = ({ currencyCode, amount, currencyName }) => (
-  <div className={styles.pocket}>
+  <button type="button" className={styles.pocket}>
     <div className={styles['pocket--flag']}>
       <Flag currencyCode={currencyCode} />
     </div>
@@ -14,7 +14,7 @@ const Pocket = ({ currencyCode, amount, currencyName }) => (
       <p className="label1">{`${currencyCode} - ${amount.toFixed(2)}`}</p>
       <p>{currencyName}</p>
     </div>
-  </div>
+  </button>
 );
 
 Pocket.propTypes = {
