@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
+import classnames from 'classnames/bind';
 
 import { useExchangeState, useExchangeDispatch } from '../../utils/exchange-context';
 import Currency from '../../../settings/currencies.json';
@@ -10,7 +10,7 @@ import Pocket from '../Pocket';
 
 import styles from './main.scss';
 
-const cx = classNames.bind(styles);
+const cx = classnames.bind(styles);
 
 const CurrenciesOverlay = ({
   title,
@@ -42,7 +42,7 @@ const CurrenciesOverlay = ({
   const disableCurrency = accountType === 'to' ? fromAccount.currency : toAccount.currency;
 
   return (
-    <div className={cx('currencies-overlay', { 'currencies-overlay--open': isOpen })}>
+    <div className={cx('currencies-overlay', { 'currencies-overlay--open': isOpen })} data-testid="overlay">
       <div className={styles['currencies-overlay__header']}>
         { title && <h2>{title}</h2>}
         <div className={styles['currencies-overlay__header--close']}>
