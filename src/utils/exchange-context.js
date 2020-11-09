@@ -100,7 +100,7 @@ const ExchangeProvider = ({ children }) => {
 
   useEffect(() => {
     onReloadRate(state.fromAccount.currency, state.toAccount.currency);
-  }, [state.fromAccount.currency, state.toAccount.currency]);
+  }, [state.fromAccount.currency]);
 
   return (
     <ExchangeStateContext.Provider value={state}>
