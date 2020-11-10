@@ -3,7 +3,8 @@ import React, {
   useContext,
   useReducer,
   useCallback,
-  useEffect
+  useEffect,
+  useState
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -83,6 +84,7 @@ const ExchangeReducer = (state, action) => {
 
 const ExchangeProvider = ({ children }) => {
   const [state, dispatch] = useReducer(ExchangeReducer, initialState);
+  const [callback, setCallback] = useState(null);
 
   const getRate = async currency => {
     const currentRate = await Request.get('https://api.exchangeratesapi.io/latest', { base: currency })
@@ -99,7 +101,15 @@ const ExchangeProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    onReloadRate(state.fromAccount.currency, state.toAccount.currency);
+    if (callback) clearInterval(callback);
+    onReloadRate(
+      state.fromAccount.currency,
+      state.toAccount.currency
+    );
+    setCallback(setInterval(() => onReloadRate(
+      state.fromAccount.currency,
+      state.toAccount.currency
+    ), 10000));
   }, [state.fromAccount.currency]);
 
   return (
