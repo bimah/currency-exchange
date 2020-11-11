@@ -1,11 +1,7 @@
-const currenciesRates = {
-  rates: {
-    EUR: 1.1212899319
-  }
-};
+import CurrencyRates from './mock-rates.json';
 
 const Request = {
-  get: () => new Promise(resolve => process.nextTick(() => resolve(currenciesRates)))
+  get: () => new Promise(resolve => process.nextTick(() => resolve(CurrencyRates)))
 };
 
 export default Request;

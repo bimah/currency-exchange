@@ -15,7 +15,7 @@ const CurrencyExchange = () => {
   };
   return (
     <ExchangeProvider>
-      <div className={styles['currency-exchange']}>
+      <div className={styles['currency-exchange']} data-testid="currency-exchange">
         <div className={styles['currency-exchange__main']}>
           <Converter onCurrencyChange={handleOpenOverlay} />
         </div>
