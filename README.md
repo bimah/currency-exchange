@@ -1,7 +1,7 @@
 # currency-exchange
 
 Simple currency exchange:
-* Pull FX rates from an [external source](https://api.exchangeratesapi.io), refreshing every 10 seconds.
+* Pull FX rates from an [external source](https://exchangeratesapi.io), refreshing every 10 seconds.
 * Contain at least three currency accounts (USD, EUR, GBP).
 * Option to make exchanges between accounts.
 * Contains two input on the exchange screen for both accounts. Each input is been validated to only allow numbers with two decimals.
