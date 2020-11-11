@@ -57,6 +57,8 @@ const Converter = ({ onCurrencyChange }) => {
     setTo(0);
   };
 
+  const isExchangeBtnDisabled = () => !rate || from > fromAccount.balance || from === 0 || to === 0;
+
   return (
     <div className={styles.converter}>
       <div className={styles['converter--content']}>
@@ -85,7 +87,7 @@ const Converter = ({ onCurrencyChange }) => {
         </div>
       </div>
       <div className={styles['converter--content__action']}>
-        <Button label="Exchange" handleClick={handleUpdateAccounts} disabled={!rate || from > fromAccount.balance} />
+        <Button label="Exchange" handleClick={handleUpdateAccounts} disabled={isExchangeBtnDisabled()} />
       </div>
     </div>
   );
