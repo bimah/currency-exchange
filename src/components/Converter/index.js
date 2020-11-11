@@ -40,7 +40,7 @@ const Converter = ({ onCurrencyChange }) => {
   const handleUpdateAccounts = () => {
     dispatch({
       type: 'updateAccounts',
-      data: {
+      payload: {
         transfers: [
           {
             currency: fromAccount.currency,

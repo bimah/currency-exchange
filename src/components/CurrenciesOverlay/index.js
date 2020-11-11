@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 
 import { useExchangeState, useExchangeDispatch } from '../../utils/exchange-context';
-import Currency from '../../../settings/currencies.json';
 
 import Button from '../Button';
 import Pocket from '../Pocket';
@@ -18,7 +17,12 @@ const CurrenciesOverlay = ({
   onClose,
   accountType
 }) => {
-  const { accounts, toAccount, fromAccount } = useExchangeState();
+  const {
+    accounts,
+    toAccount,
+    fromAccount,
+    availableCurrencies
+  } = useExchangeState();
   const dispatch = useExchangeDispatch();
 
   const otherPockets = (existing, fullList) => {
@@ -31,7 +35,7 @@ const CurrenciesOverlay = ({
   const changeAccount = currency => {
     dispatch({
       type: 'updateAccount',
-      data: {
+      payload: {
         account: accountType,
         currency
       }
@@ -58,7 +62,7 @@ const CurrenciesOverlay = ({
                 <Pocket
                   currencyCode={account.currency}
                   amount={account.balance}
-                  currencyName={Currency[account.currency]}
+                  currencyName={availableCurrencies[account.currency]}
                   handleCurrencyClick={changeAccount}
                   disabled={account.currency === disableCurrency}
                 />
@@ -70,7 +74,7 @@ const CurrenciesOverlay = ({
           <h3>Other</h3>
           <ul>
             {
-              Object.entries(otherPockets(accounts, Currency)).map(([key, value]) => (
+              Object.entries(otherPockets(accounts, availableCurrencies)).map(([key, value]) => (
                 <li key={key}>
                   <Pocket
                     currencyCode={key}

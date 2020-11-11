@@ -9,6 +9,7 @@ import React, {
 import PropTypes from 'prop-types';
 
 import UserData from '../../settings/user-details.json';
+import Currencies from '../../settings/currencies.json';
 import Request from './request';
 
 const { accounts, general } = UserData;
@@ -26,7 +27,8 @@ const initialState = {
   toAccount: accounts.filter(
     account => account.currency !== general.defaultCurrency
   )[0],
-  rate: null
+  rate: null,
+  availableCurrencies: Currencies
 };
 
 const ExchangeReducer = (state, action) => {
@@ -35,7 +37,7 @@ const ExchangeReducer = (state, action) => {
       return { ...state, ...{ fromAccount: state.toAccount, toAccount: state.fromAccount } };
     }
     case 'updateAccounts': {
-      const { transfers } = action.data;
+      const { transfers } = action.payload;
       let newAccounts = state.accounts;
       transfers.forEach(transfer => {
         if (newAccounts.filter(acc => acc.currency === transfer.currency).length === 0) {
@@ -66,10 +68,10 @@ const ExchangeReducer = (state, action) => {
       };
     }
     case 'updateRate': {
-      return { ...state, ...{ rate: action.data } };
+      return { ...state, ...{ rate: action.payload } };
     }
     case 'updateAccount': {
-      const { account, currency } = action.data;
+      const { account, currency } = action.payload;
       const [selectedAccount] = state.accounts.filter(acc => acc.currency === currency);
       const pocket = selectedAccount || { currency, balance: 0 };
       if (account === 'to') {
@@ -95,7 +97,7 @@ const ExchangeProvider = ({ children }) => {
     const rateData = await getRate(from);
     dispatch({
       type: 'updateRate',
-      data: rateData.rates[to]
+      payload: rateData.rates[to]
     });
   }, []);
 
