@@ -4,8 +4,8 @@
   "description": "Currency Exchange",
   "private": true,
   "scripts": {
-    "test": "jest",
-    "test:coverage": "jest --coverage --watchAll --no-cache",
+    "test": "jest --silent",
+    "test:coverage": "jest --silent --coverage --watchAll --no-cache",
     "start": "cross-env NODE_ENV=development webpack-dev-server  --config webpack.config.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "lint": "eslint . --ext .js --cache"
