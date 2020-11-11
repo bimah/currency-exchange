@@ -9,7 +9,7 @@ const Sass = require('sass');
 module.exports = {
   mode: 'development',
   entry: {
-    app: ['@babel/polyfill', './src/index.js']
+    app: './src/index.js'
   },
   devtool: 'inline-source-map',
   devServer: {

@@ -9,7 +9,7 @@ import React, {
 import PropTypes from 'prop-types';
 
 import UserData from '../../settings/user-details.json';
-import Request from './requst';
+import Request from './request';
 
 const { accounts, general } = UserData;
 
@@ -87,8 +87,7 @@ const ExchangeProvider = ({ children }) => {
   const [callback, setCallback] = useState(null);
 
   const getRate = async currency => {
-    const currentRate = await Request.get('https://api.exchangeratesapi.io/latest', { base: currency })
-      .catch(error => console.log(error));
+    const currentRate = await Request.get('https://api.exchangeratesapi.io/latest', { base: currency });
     return currentRate;
   };
 

@@ -8,7 +8,7 @@ const Sass = require('sass');
 module.exports = {
   mode: 'production',
   entry: {
-    app: ['@babel/polyfill', './src/index.js']
+    app: './src/index.js'
   },
   module: {
     rules: [

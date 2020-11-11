@@ -9,10 +9,20 @@ module.exports = api => {
         esmodules: true
       }
     }],
-    '@babel/preset-react'
+    '@babel/react'
   ];
 
-  const plugins = [];
+  const plugins = [
+    [
+      '@babel/transform-runtime',
+      {
+        corejs: {
+          version: 3,
+          proposals: true
+        }
+      }
+    ]
+  ];
 
   api.cache(() => process.env.NODE_ENV);
 

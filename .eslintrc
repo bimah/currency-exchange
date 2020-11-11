@@ -13,7 +13,8 @@
     "jsx-a11y",
     "import",
     "react-hooks",
-    "testing-library"
+    "testing-library",
+    "jest-dom"
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",

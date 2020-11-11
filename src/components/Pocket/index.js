@@ -12,7 +12,7 @@ const Pocket = ({
   handleCurrencyClick,
   disabled
 }) => (
-  <button type="button" className={styles.pocket} onClick={() => handleCurrencyClick(currencyCode)} disabled={disabled}>
+  <button type="button" className={styles.pocket} onClick={() => handleCurrencyClick(currencyCode)} disabled={disabled} data-testid="pocket">
     <div className={styles['pocket--flag']}>
       <Flag currencyCode={currencyCode} />
     </div>

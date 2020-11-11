@@ -45,7 +45,7 @@ const CurrencyDisplay = ({
             <p>{`Balance: ${Currency.format(language, pocket.currency, pocket.balance)}`}</p>
           </div>
           <div className={styles['currency-display__value']}>
-            <input className={cx('currency-input', { 'currency-input--over': overBalance })} type="text" placeholder={0} value={addPre(inputValue)} onChange={onInputChange} aria-label="Amount" />
+            <input className={cx('currency-input', { 'currency-input--over': overBalance })} type="text" placeholder={0} value={addPre(inputValue)} onChange={onInputChange} aria-label="Amount" data-testid="display-input" />
             {overBalance ? <p className={styles['currency-display__value--over']}>exceed balance</p> : null}
           </div>
         </div>
