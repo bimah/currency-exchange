@@ -9,7 +9,8 @@ module.exports = api => {
         esmodules: true
       }
     }],
-    '@babel/react'
+    '@babel/react',
+    '@babel/preset-typescript'
   ];
 
   const plugins = [

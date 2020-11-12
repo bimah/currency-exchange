@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, FunctionComponent } from 'react';
 import classNames from 'classnames/bind';
 import { useExchangeState } from '../../utils/exchange-context';
 
@@ -10,7 +9,20 @@ import Button from '../Button';
 
 const cx = classNames.bind(styles);
 
-const CurrencyDisplay = ({
+type PocketProps = {
+  currency: string,
+  balance: number
+};
+
+type CurrencyDisplayProps = {
+  pocket: PocketProps
+  add?: boolean,
+  handleInputChange: (arg0: number, arg1: boolean) => void
+  handleCurrencyChange: (arg0: string) => void,
+  amount: number
+};
+
+const CurrencyDisplay:FunctionComponent<CurrencyDisplayProps> = ({
   pocket,
   add,
   handleInputChange,
@@ -18,15 +30,15 @@ const CurrencyDisplay = ({
   amount,
 }) => {
   const { language } = useExchangeState();
-  const [inputValue, setInputValue] = useState(String(amount) || '');
+  const [inputValue, setInputValue] = useState<string | number>(String(amount) || '');
 
   useEffect(() => {
     setInputValue(amount > 0 ? amount : '');
   }, [amount]);
 
-  const onInputChange = event => {
-    const { value } = event.target;
-    const formattedValue = Currency.restrictInputValue(value, inputValue);
+  const onInputChange = (event: React.ChangeEvent) => {
+    const target = event.target as HTMLInputElement;
+    const formattedValue = Currency.restrictInputValue(target.value, inputValue);
 
     setInputValue(formattedValue);
     handleInputChange(formattedValue, add);
@@ -45,7 +57,7 @@ const CurrencyDisplay = ({
             <p>{`Balance: ${Currency.format(language, pocket.currency, pocket.balance)}`}</p>
           </div>
           <div className={styles['currency-display__value']}>
-            <input className={cx('currency-input', { 'currency-input--over': overBalance })} type="text" placeholder={0} value={currencyInputValue} onChange={onInputChange} aria-label="Amount" data-testid="display-input" />
+            <input className={cx('currency-input', { 'currency-input--over': overBalance })} type="text" placeholder="0" value={currencyInputValue} onChange={onInputChange} aria-label="Amount" data-testid="display-input" />
             {overBalance ? <p className={styles['currency-display__value--over']}>exceed balance</p> : null}
           </div>
         </div>
@@ -54,22 +66,8 @@ const CurrencyDisplay = ({
   );
 };
 
-CurrencyDisplay.propTypes = {
-  pocket: PropTypes.shape({
-    currency: PropTypes.string,
-    balance: PropTypes.number
-  }).isRequired,
-  add: PropTypes.bool,
-  handleInputChange: PropTypes.func,
-  handleCurrencyChange: PropTypes.func,
-  amount: PropTypes.number,
-};
-
 CurrencyDisplay.defaultProps = {
-  amount: null,
-  add: true,
-  handleInputChange: () => {},
-  handleCurrencyChange: () => {},
+  add: true
 };
 
 export default CurrencyDisplay;

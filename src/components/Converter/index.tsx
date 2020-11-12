@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, FunctionComponent } from 'react';
 
 import { useExchangeState, useExchangeDispatch } from '../../utils/exchange-context';
 
@@ -9,8 +8,13 @@ import CurrencyDisplay from '../CurrencyDisplay';
 import Currency from '../../utils/currency';
 
 import styles from './main.scss';
+import { number } from 'prop-types';
 
-const Converter = ({ onCurrencyChange }) => {
+type ConverterProps = {
+  onCurrencyChange: (arg0: string) => void
+}
+
+const Converter:FunctionComponent<ConverterProps>= ({ onCurrencyChange }) => {
   const {
     fromAccount,
     toAccount,
@@ -18,10 +22,10 @@ const Converter = ({ onCurrencyChange }) => {
     language
   } = useExchangeState();
   const dispatch = useExchangeDispatch();
-  const [from, setFrom] = useState(0);
-  const [to, setTo] = useState(0);
+  const [from, setFrom] = useState<number>(0);
+  const [to, setTo] = useState<number>(0);
 
-  const onInputChange = (value, add) => {
+  const onInputChange = (value: number, add: boolean) => {
     setFrom(add ? parseFloat(Currency.sortDecimal(value / rate, 2)) : value);
     setTo(add ? value : parseFloat(Currency.sortDecimal(value * rate, 2)));
   };
@@ -53,7 +57,7 @@ const Converter = ({ onCurrencyChange }) => {
   const isExchangeBtnDisabled = !rate || from > fromAccount.balance || from === 0 || to === 0;
 
   return (
-    <div className={styles.converter}>
+    <div>
       <div className={styles['converter--content']}>
         <div className={styles['converter--content__from']}>
           <CurrencyDisplay
@@ -84,14 +88,6 @@ const Converter = ({ onCurrencyChange }) => {
       </div>
     </div>
   );
-};
-
-Converter.propTypes = {
-  onCurrencyChange: PropTypes.func
-};
-
-Converter.defaultProps = {
-  onCurrencyChange: () => {}
 };
 
 export default Converter;

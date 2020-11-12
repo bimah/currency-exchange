@@ -1,11 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 
 import styles from './main.scss';
 
 import Flag from '../Flag';
 
-const Pocket = ({
+type PocketProps = {
+  currencyCode: string,
+  amount: number,
+  currencyName: string,
+  handleCurrencyClick: (arg0: string) => void,
+  disabled: boolean
+};
+
+const Pocket:FunctionComponent<PocketProps> = ({
   currencyCode,
   amount,
   currencyName,
@@ -23,17 +30,8 @@ const Pocket = ({
   </button>
 );
 
-Pocket.propTypes = {
-  currencyCode: PropTypes.string.isRequired,
-  amount: PropTypes.number,
-  currencyName: PropTypes.string.isRequired,
-  handleCurrencyClick: PropTypes.func,
-  disabled: PropTypes.bool
-};
-
 Pocket.defaultProps = {
   amount: 0,
-  handleCurrencyClick: () => {},
   disabled: false
 };
 

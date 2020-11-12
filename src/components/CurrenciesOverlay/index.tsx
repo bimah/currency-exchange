@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, FunctionComponent } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 
@@ -11,7 +11,19 @@ import styles from './main.scss';
 
 const cx = classnames.bind(styles);
 
-const CurrenciesOverlay = ({
+type CurrenciesOverlayProps = {
+  title?: string,
+  isOpen: boolean,
+  onClose: () => void,
+  accountType?: string
+}
+
+type AccountProps = {
+  currency: string,
+  balance: number
+}
+
+const CurrenciesOverlay:FunctionComponent<CurrenciesOverlayProps> = ({
   title,
   isOpen,
   onClose,
@@ -26,15 +38,15 @@ const CurrenciesOverlay = ({
   const dispatch = useExchangeDispatch();
 
   const otherPockets = useMemo(() => {
-    const existingIds = accounts.map(ex => ex.currency);
+    const existingIds = accounts.map((ex: AccountProps) => ex.currency);
     const filteredList = { ...availableCurrencies };
 
-    existingIds.forEach(id => delete filteredList[id]);
+    existingIds.forEach((id: string) => delete filteredList[id]);
 
     return filteredList;
   }, [accounts]);
 
-  const changeAccount = currency => {
+  const changeAccount = (currency: string) => {
     dispatch({
       type: 'updateAccount',
       payload: {
@@ -95,17 +107,9 @@ const CurrenciesOverlay = ({
   );
 };
 
-CurrenciesOverlay.propTypes = {
-  title: PropTypes.string,
-  isOpen: PropTypes.bool,
-  onClose: PropTypes.func,
-  accountType: PropTypes.string
-};
-
 CurrenciesOverlay.defaultProps = {
   title: null,
   isOpen: false,
-  onClose: () => {},
   accountType: null
 };
 

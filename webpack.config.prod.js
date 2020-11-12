@@ -10,10 +10,13 @@ module.exports = {
   entry: {
     app: './src/index.js'
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.json']
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: [/\.js$/, /\.tsx?$/],
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',

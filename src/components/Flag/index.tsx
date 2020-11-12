@@ -1,16 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 
 import styles from './main.scss';
 
-const Flag = ({ currencyCode }) => (
+type FlagProps = {
+  currencyCode: string
+};
+
+const Flag:FunctionComponent<FlagProps> = ({ currencyCode }) => (
   <div className={styles.flag}>
     <img src={`../../../images/currency-flags/${currencyCode.toLowerCase()}.svg`} alt={`Currency flag for ${currencyCode}`} />
   </div>
 );
-
-Flag.propTypes = {
-  currencyCode: PropTypes.string.isRequired
-};
 
 export default Flag;

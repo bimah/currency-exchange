@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { string } from 'prop-types';
+import React, { useState, FunctionComponent } from 'react';
 import { ExchangeProvider } from '../../utils/exchange-context';
 
 import Converter from '../Converter';
@@ -6,10 +7,11 @@ import CurrenciesOverlay from '../CurrenciesOverlay';
 
 import styles from './main.scss';
 
-const CurrencyExchange = () => {
-  const [openOverlay, setOpenOverlay] = useState(false);
-  const [account, setAccount] = useState(null);
-  const handleOpenOverlay = acc => {
+const CurrencyExchange:FunctionComponent = () => {
+  const [openOverlay, setOpenOverlay] = useState<boolean>(false);
+  const [account, setAccount] = useState<string>(null);
+  const handleOpenOverlay = (acc: string) => {
+    console.log(acc);
     setAccount(acc);
     setOpenOverlay(true);
   };

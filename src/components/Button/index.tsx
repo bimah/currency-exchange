@@ -1,12 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './main.scss';
 
 const cx = classNames.bind(styles);
 
-const Button = ({
+type ButtonProps = {
+  btnStyle?: string,
+  handleClick: (arg0: React.MouseEvent) => void,
+  label?: string,
+  disabled?: boolean
+}
+
+const Button:FunctionComponent<ButtonProps> = ({
   btnStyle,
   handleClick,
   label,
@@ -24,17 +30,8 @@ const Button = ({
   </button>
 );
 
-Button.propTypes = {
-  btnStyle: PropTypes.string,
-  handleClick: PropTypes.func,
-  label: PropTypes.string,
-  disabled: PropTypes.bool
-};
-
-Button.defaultProps = {
+Button.defaultProps ={
   btnStyle: 'primary',
-  handleClick: () => {},
-  label: '',
   disabled: false
 };
 

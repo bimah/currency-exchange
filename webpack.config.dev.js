@@ -17,6 +17,9 @@ module.exports = {
     contentBase: './dist',
     hot: true,
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.scss']
+  },
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new CopyPlugin({
@@ -27,7 +30,9 @@ module.exports = {
         }
       ]
     }),
-    new ESLintPlugin(),
+    new ESLintPlugin({
+      extensions: ['js', 'tsx']
+    }),
     new HtmlWebpackPlugin({
       title: 'Currency Exchange',
       template: 'index.html'
@@ -41,7 +46,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: [/\.jsx?$/, /\.tsx?$/],
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -55,6 +60,7 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           'style-loader',
+          'css-modules-typescript-loader',
           {
             loader: 'css-loader',
             options: {
