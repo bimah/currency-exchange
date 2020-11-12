@@ -1,5 +1,6 @@
 const urlEncode = obj => Object.keys(obj).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`).join('&');
 
+
 const req = params => new Promise((resolve, reject) => fetch(params.endpoint, params.args)
   .then(response => {
     if (response.status > 400) reject(response);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 
@@ -25,12 +25,14 @@ const CurrenciesOverlay = ({
   } = useExchangeState();
   const dispatch = useExchangeDispatch();
 
-  const otherPockets = (existing, fullList) => {
-    const existingIds = existing.map(ex => ex.currency);
-    const filteredList = { ...fullList };
+  const otherPockets = useMemo(() => {
+    const existingIds = accounts.map(ex => ex.currency);
+    const filteredList = { ...availableCurrencies };
+
     existingIds.forEach(id => delete filteredList[id]);
+
     return filteredList;
-  };
+  }, [accounts]);
 
   const changeAccount = currency => {
     dispatch({
@@ -48,7 +50,7 @@ const CurrenciesOverlay = ({
   return (
     <div className={cx('currencies-overlay', { 'currencies-overlay--open': isOpen })} data-testid="overlay">
       <div className={styles['currencies-overlay__header']}>
-        { title && <h2>{title}</h2>}
+        { title ? <h2>{title}</h2> : null}
         <div className={styles['currencies-overlay__header--close']}>
           <Button btnStyle="close" handleClick={onClose} />
         </div>
@@ -74,7 +76,7 @@ const CurrenciesOverlay = ({
           <h3>Other</h3>
           <ul>
             {
-              Object.entries(otherPockets(accounts, availableCurrencies)).map(([key, value]) => (
+              Object.entries(otherPockets).map(([key, value]) => (
                 <li key={key}>
                   <Pocket
                     currencyCode={key}

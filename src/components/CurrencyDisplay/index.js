@@ -18,7 +18,7 @@ const CurrencyDisplay = ({
   amount,
 }) => {
   const { language } = useExchangeState();
-  const [inputValue, setInputValue] = useState(amount || '');
+  const [inputValue, setInputValue] = useState(String(amount) || '');
 
   useEffect(() => {
     setInputValue(amount > 0 ? amount : '');
@@ -26,14 +26,14 @@ const CurrencyDisplay = ({
 
   const onInputChange = event => {
     const { value } = event.target;
-    const inputNumber = value.charAt(0) === '-' || value.charAt(0) === '+' ? value.substring(2) : value;
-    const doubleRegex = /^(?=.*[1-9])\d*(?:\.|\.\d{1,2})?\s*$/;
-    const formattedValue = doubleRegex.test(inputNumber) || inputNumber === '' ? inputNumber : inputValue;
+    const formattedValue = Currency.restrictInputValue(value, inputValue);
+
     setInputValue(formattedValue);
-    handleInputChange(formattedValue, add, pocket.currency);
+    handleInputChange(formattedValue, add);
   };
 
-  const addPre = value => (value !== '' ? `${add ? '+' : '-'} ${value}` : value);
+  const prefix = add ? '+' : '-';
+  const currencyInputValue = inputValue !== '' ? `${prefix} ${inputValue}` : inputValue;
   const overBalance = !add && inputValue > pocket.balance;
 
   return (
@@ -45,7 +45,7 @@ const CurrencyDisplay = ({
             <p>{`Balance: ${Currency.format(language, pocket.currency, pocket.balance)}`}</p>
           </div>
           <div className={styles['currency-display__value']}>
-            <input className={cx('currency-input', { 'currency-input--over': overBalance })} type="text" placeholder={0} value={addPre(inputValue)} onChange={onInputChange} aria-label="Amount" data-testid="display-input" />
+            <input className={cx('currency-input', { 'currency-input--over': overBalance })} type="text" placeholder={0} value={currencyInputValue} onChange={onInputChange} aria-label="Amount" data-testid="display-input" />
             {overBalance ? <p className={styles['currency-display__value--over']}>exceed balance</p> : null}
           </div>
         </div>

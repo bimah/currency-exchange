@@ -22,20 +22,13 @@ const Converter = ({ onCurrencyChange }) => {
   const [to, setTo] = useState(0);
 
   const onInputChange = (value, add) => {
-    if (add) {
-      setFrom(parseFloat(Currency.sortDecimal(value / rate, 2)));
-      setTo(parseFloat(value));
-    } else {
-      setTo(parseFloat(Currency.sortDecimal(value * rate, 2)));
-      setFrom(parseFloat(value));
-    }
+    setFrom(add ? parseFloat(Currency.sortDecimal(value / rate, 2)) : value);
+    setTo(add ? value : parseFloat(Currency.sortDecimal(value * rate, 2)));
   };
 
   useEffect(() => {
     onInputChange(from, false);
   }, [rate]);
-
-  const posToNeg = num => -Math.abs(num);
 
   const handleUpdateAccounts = () => {
     dispatch({
@@ -44,7 +37,7 @@ const Converter = ({ onCurrencyChange }) => {
         transfers: [
           {
             currency: fromAccount.currency,
-            amount: posToNeg(from)
+            amount: Currency.posToNeg(from)
           },
           {
             currency: toAccount.currency,
@@ -57,7 +50,7 @@ const Converter = ({ onCurrencyChange }) => {
     setTo(0);
   };
 
-  const isExchangeBtnDisabled = () => !rate || from > fromAccount.balance || from === 0 || to === 0;
+  const isExchangeBtnDisabled = !rate || from > fromAccount.balance || from === 0 || to === 0;
 
   return (
     <div className={styles.converter}>
@@ -87,7 +80,7 @@ const Converter = ({ onCurrencyChange }) => {
         </div>
       </div>
       <div className={styles['converter--content__action']}>
-        <Button label="Exchange" handleClick={handleUpdateAccounts} disabled={isExchangeBtnDisabled()} />
+        <Button label="Exchange" handleClick={handleUpdateAccounts} disabled={isExchangeBtnDisabled} />
       </div>
     </div>
   );
