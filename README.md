@@ -9,7 +9,7 @@ Simple currency exchange:
 
 ## Technical specification
 
-* The application is written in React with Webpack as module bundler and Babel as a compiler.
+* The application is written in React with Webpack as module bundler, Babel as a compiler and Typescript.
 * Jest and React Testing Library are used to test the application.
 
 ### Running the application
