@@ -17,8 +17,8 @@ type PocketProps = {
 type CurrencyDisplayProps = {
   pocket: PocketProps
   add?: boolean,
-  handleInputChange: (arg0: string, arg1: boolean) => void
-  handleCurrencyChange: (arg0: string) => void,
+  handleInputChange?: (arg0: string, arg1: boolean) => void
+  handleCurrencyChange?: (arg0: string) => void,
   amount: number
 };
 
@@ -74,7 +74,9 @@ const CurrencyDisplay:FunctionComponent<CurrencyDisplayProps> = ({
 };
 
 CurrencyDisplay.defaultProps = {
-  add: true
+  add: true,
+  handleInputChange: () => null,
+  handleCurrencyChange: () => null,
 };
 
 export default CurrencyDisplay;

@@ -57,11 +57,12 @@ test('CurrenciesOverlay to have same currency disabled', async () => {
 });
 
 test('CurrenciesOverlay to close on selection', async () => {
-  const { getByText, getByTestId } = render(
+  const handleOnClose = jest.fn();
+  const { getByText } = render(
     <ExchangeProvider>
-      <CurrenciesOverlay title="test overlay" accountType="to" />
+      <CurrenciesOverlay title="test overlay" accountType="to" isOpen onClose={handleOnClose} />
     </ExchangeProvider>
   );
   fireEvent.click(getByText('Swiss Franc').closest('button'));
-  await waitFor(() => expect(getByTestId('overlay').classList.contains('currencies-overlay--open')).toBe(false));
+  await waitFor(() => expect(handleOnClose).toHaveBeenCalledTimes(1));
 });

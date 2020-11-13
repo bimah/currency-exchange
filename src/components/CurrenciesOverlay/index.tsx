@@ -14,7 +14,7 @@ const cx = classnames.bind(styles);
 type CurrenciesOverlayProps = {
   title?: string,
   isOpen: boolean,
-  onClose: () => void,
+  onClose?: () => void,
   accountType?: string
 }
 
@@ -46,7 +46,7 @@ const CurrenciesOverlay:FunctionComponent<CurrenciesOverlayProps> = ({
     return filteredList;
   }, [accounts]);
 
-  const changeAccount = (currency: string) => {
+  const changeAccount = (currency: string):void => {
     dispatch({
       type: 'updateAccount',
       payload: {
@@ -110,7 +110,8 @@ const CurrenciesOverlay:FunctionComponent<CurrenciesOverlayProps> = ({
 CurrenciesOverlay.defaultProps = {
   title: null,
   isOpen: false,
-  accountType: null
+  accountType: null,
+  onClose: () => null
 };
 
 export default CurrenciesOverlay;

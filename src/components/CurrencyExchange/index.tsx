@@ -20,7 +20,7 @@ const CurrencyExchange:FunctionComponent = () => {
         <div className={styles['currency-exchange__main']}>
           <Converter onCurrencyChange={handleOpenOverlay} />
         </div>
-        <CurrenciesOverlay title="Choose currency" isOpen={openOverlay} accountType={account} onClose={() => setOpenOverlay(false)} />
+        <CurrenciesOverlay title="Choose currency" isOpen={openOverlay} accountType={account} onClose={():void => setOpenOverlay(false)} />
       </div>
     </ExchangeProvider>
   );

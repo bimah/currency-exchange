@@ -25,7 +25,7 @@ const Converter:FunctionComponent<ConverterProps>= ({ onCurrencyChange }) => {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(0);
 
-  const onInputChange = (value: string, add: boolean) => {
+  const onInputChange = (value: string, add: boolean):void => {
     setFrom(add ? parseFloat(Currency.sortDecimal(Number(value) / rate, 2)) : Number(value));
     setTo(add ? Number(value) : parseFloat(Currency.sortDecimal(Number(value) * rate, 2)));
   };
