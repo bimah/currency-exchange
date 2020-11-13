@@ -30,23 +30,23 @@ const CurrencyDisplay:FunctionComponent<CurrencyDisplayProps> = ({
   amount,
 }) => {
   const { language } = useExchangeState();
-  const [inputValue, setInputValue] = useState<string | number>(String(amount) || '');
+  const [inputValue, setInputValue] = useState<string>(String(amount) || '');
 
   useEffect(() => {
-    setInputValue(amount > 0 ? amount : '');
+    setInputValue(amount > 0 ? String(amount) : '');
   }, [amount]);
 
   const onInputChange = (event: React.ChangeEvent) => {
     const target = event.target as HTMLInputElement;
     const formattedValue: number = Currency.restrictInputValue(target.value, inputValue);
 
-    setInputValue(formattedValue);
+    setInputValue(String(formattedValue));
     handleInputChange(formattedValue, add);
   };
 
   const prefix = add ? '+' : '-';
   const currencyInputValue = inputValue !== '' ? `${prefix} ${inputValue}` : inputValue;
-  const overBalance = !add && inputValue > pocket.balance;
+  const overBalance = !add && parseFloat(inputValue) > pocket.balance;
 
   return (
     <div className={styles['currency-display']}>
