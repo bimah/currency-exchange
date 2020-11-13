@@ -1,5 +1,4 @@
 import React, { useMemo, FunctionComponent } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 
 import { useExchangeState, useExchangeDispatch } from '../../utils/exchange-context';

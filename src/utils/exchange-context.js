@@ -6,7 +6,6 @@ import React, {
   useEffect,
   useState
 } from 'react';
-import PropTypes from 'prop-types';
 
 import UserData from '../../settings/user-details.json';
 import Currencies from '../../settings/currencies.json';
@@ -41,7 +40,7 @@ const ExchangeReducer = (state, action) => {
       let newAccounts = state.accounts;
       transfers.forEach(transfer => {
         if (newAccounts.filter(acc => acc.currency === transfer.currency).length === 0) {
-          newAccounts.push({ currency: transfer.currency, balance: transfer.amount });
+          newAccounts.push({ currency: transfer.currency, balance: 0 });
         }
         newAccounts = newAccounts.map(acc => {
           const updatedBalance = acc.currency === transfer.currency
@@ -120,10 +119,6 @@ const ExchangeProvider = ({ children }) => {
       </ExchangeDispatchContext.Provider>
     </ExchangeStateContext.Provider>
   );
-};
-
-ExchangeProvider.propTypes = {
-  children: PropTypes.node.isRequired
 };
 
 const useExchangeState = () => {

@@ -8,7 +8,6 @@ import CurrencyDisplay from '../CurrencyDisplay';
 import Currency from '../../utils/currency';
 
 import styles from './main.scss';
-import { number } from 'prop-types';
 
 type ConverterProps = {
   onCurrencyChange: (arg0: string) => void

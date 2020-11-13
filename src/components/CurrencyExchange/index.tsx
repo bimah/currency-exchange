@@ -1,4 +1,3 @@
-import { string } from 'prop-types';
 import React, { useState, FunctionComponent } from 'react';
 import { ExchangeProvider } from '../../utils/exchange-context';
 
