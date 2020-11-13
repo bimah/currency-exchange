@@ -11,7 +11,6 @@ const CurrencyExchange:FunctionComponent = () => {
   const [openOverlay, setOpenOverlay] = useState<boolean>(false);
   const [account, setAccount] = useState<string>(null);
   const handleOpenOverlay = (acc: string) => {
-    console.log(acc);
     setAccount(acc);
     setOpenOverlay(true);
   };

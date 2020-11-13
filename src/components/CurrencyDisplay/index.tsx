@@ -38,7 +38,7 @@ const CurrencyDisplay:FunctionComponent<CurrencyDisplayProps> = ({
 
   const onInputChange = (event: React.ChangeEvent) => {
     const target = event.target as HTMLInputElement;
-    const formattedValue = Currency.restrictInputValue(target.value, inputValue);
+    const formattedValue: number = Currency.restrictInputValue(target.value, inputValue);
 
     setInputValue(formattedValue);
     handleInputChange(formattedValue, add);

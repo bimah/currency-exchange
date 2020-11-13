@@ -12,7 +12,7 @@ import { number } from 'prop-types';
 
 type ConverterProps = {
   onCurrencyChange: (arg0: string) => void
-}
+};
 
 const Converter:FunctionComponent<ConverterProps>= ({ onCurrencyChange }) => {
   const {
@@ -54,7 +54,7 @@ const Converter:FunctionComponent<ConverterProps>= ({ onCurrencyChange }) => {
     setTo(0);
   };
 
-  const isExchangeBtnDisabled = !rate || from > fromAccount.balance || from === 0 || to === 0;
+  const isExchangeBtnDisabled: boolean = !rate || from > fromAccount.balance || from === 0 || to === 0;
 
   return (
     <div>

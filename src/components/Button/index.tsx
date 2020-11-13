@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 
 type ButtonProps = {
   btnStyle?: string,
-  handleClick: (arg0: React.MouseEvent) => void,
+  handleClick?: (arg0: React.MouseEvent) => void,
   label?: string,
   disabled?: boolean
 }

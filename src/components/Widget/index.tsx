@@ -3,8 +3,8 @@ import React, { FunctionComponent } from 'react';
 import styles from './main.scss';
 
 type WidgetProps = {
-  title: string,
-}
+  title: string
+};
 
 const Widget:FunctionComponent<WidgetProps> = ({ title, children }) => (
   <div className={styles.widget}>

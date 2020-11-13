@@ -38,8 +38,8 @@ const CurrenciesOverlay:FunctionComponent<CurrenciesOverlayProps> = ({
   const dispatch = useExchangeDispatch();
 
   const otherPockets = useMemo(() => {
-    const existingIds = accounts.map((ex: AccountProps) => ex.currency);
-    const filteredList = { ...availableCurrencies };
+    const existingIds: string[] = accounts.map((ex: AccountProps) => ex.currency);
+    const filteredList: Record<string, string> = { ...availableCurrencies };
 
     existingIds.forEach((id: string) => delete filteredList[id]);
 
@@ -57,7 +57,7 @@ const CurrenciesOverlay:FunctionComponent<CurrenciesOverlayProps> = ({
     onClose();
   };
 
-  const disableCurrency = accountType === 'to' ? fromAccount.currency : toAccount.currency;
+  const disableCurrency: string = accountType === 'to' ? fromAccount.currency : toAccount.currency;
 
   return (
     <div className={cx('currencies-overlay', { 'currencies-overlay--open': isOpen })} data-testid="overlay">
