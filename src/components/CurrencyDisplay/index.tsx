@@ -17,7 +17,7 @@ type PocketProps = {
 type CurrencyDisplayProps = {
   pocket: PocketProps
   add?: boolean,
-  handleInputChange: (arg0: number, arg1: boolean) => void
+  handleInputChange: (arg0: string, arg1: boolean) => void
   handleCurrencyChange: (arg0: string) => void,
   amount: number
 };
@@ -36,11 +36,10 @@ const CurrencyDisplay:FunctionComponent<CurrencyDisplayProps> = ({
     setInputValue(amount > 0 ? String(amount) : '');
   }, [amount]);
 
-  const onInputChange = (event: React.ChangeEvent) => {
-    const target = event.target as HTMLInputElement;
-    const formattedValue: number = Currency.restrictInputValue(target.value, inputValue);
+  const onInputChange = (value: string):void => {
+    const formattedValue: string = Currency.restrictInputValue(value, inputValue);
 
-    setInputValue(String(formattedValue));
+    setInputValue(formattedValue);
     handleInputChange(formattedValue, add);
   };
 
@@ -57,7 +56,15 @@ const CurrencyDisplay:FunctionComponent<CurrencyDisplayProps> = ({
             <p>{`Balance: ${Currency.format(language, pocket.currency, pocket.balance)}`}</p>
           </div>
           <div className={styles['currency-display__value']}>
-            <input className={cx('currency-input', { 'currency-input--over': overBalance })} type="text" placeholder="0" value={currencyInputValue} onChange={onInputChange} aria-label="Amount" data-testid="display-input" />
+            <input
+              className={cx('currency-input', { 'currency-input--over': overBalance })}
+              type="text"
+              placeholder="0"
+              value={currencyInputValue}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>): void => onInputChange(event.target.value)}
+              aria-label="Amount"
+              data-testid="display-input"
+            />
             {overBalance ? <p className={styles['currency-display__value--over']}>exceed balance</p> : null}
           </div>
         </div>

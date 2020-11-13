@@ -25,13 +25,13 @@ const Converter:FunctionComponent<ConverterProps>= ({ onCurrencyChange }) => {
   const [from, setFrom] = useState<number>(0);
   const [to, setTo] = useState<number>(0);
 
-  const onInputChange = (value: number, add: boolean) => {
-    setFrom(add ? parseFloat(Currency.sortDecimal(value / rate, 2)) : value);
-    setTo(add ? value : parseFloat(Currency.sortDecimal(value * rate, 2)));
+  const onInputChange = (value: string, add: boolean) => {
+    setFrom(add ? parseFloat(Currency.sortDecimal(Number(value) / rate, 2)) : Number(value));
+    setTo(add ? Number(value) : parseFloat(Currency.sortDecimal(Number(value) * rate, 2)));
   };
 
   useEffect(() => {
-    onInputChange(from, false);
+    onInputChange(String(from), false);
   }, [rate]);
 
   const handleUpdateAccounts = () => {
