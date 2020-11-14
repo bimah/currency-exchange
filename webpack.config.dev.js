@@ -9,7 +9,7 @@ const Sass = require('sass');
 module.exports = {
   mode: 'development',
   entry: {
-    app: './src/index.js'
+    app: './src/index.tsx'
   },
   devtool: 'inline-source-map',
   devServer: {

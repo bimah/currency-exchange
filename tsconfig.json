@@ -8,6 +8,7 @@
     },
     "target": "ESNext",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "jsx": "preserve",
     "noEmit": true,
     "allowSyntheticDefaultImports": true,

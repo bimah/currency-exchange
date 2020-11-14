@@ -8,10 +8,10 @@ const Sass = require('sass');
 module.exports = {
   mode: 'production',
   entry: {
-    app: './src/index.js'
+    app: './src/index.tsx'
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.scss']
   },
   module: {
     rules: [
@@ -31,6 +31,7 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
+          'css-modules-typescript-loader',
           {
             loader: 'css-loader',
             options: {

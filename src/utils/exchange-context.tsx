@@ -4,7 +4,10 @@ import React, {
   useReducer,
   useCallback,
   useEffect,
-  useState
+  useState,
+  FunctionComponent,
+  Context,
+  Provider
 } from 'react';
 
 import UserData from '../../settings/user-details.json';
@@ -13,11 +16,30 @@ import Request from './request';
 
 const { accounts, general } = UserData;
 
-const ExchangeStateContext = createContext();
-const ExchangeDispatchContext = createContext();
+type Account = {
+  currency: string,
+  balance: number
+};
+
+type State = {
+  accounts: Account[],
+  language: string
+  fromAccount: Account,
+  toAccount: Account,
+  rate: number,
+  availableCurrencies: Record<string, string >
+};
+
+type Action = {
+  type: string,
+  payload?: Record<string, any>
+};
+
+const ExchangeStateContext = createContext({});
+const ExchangeDispatchContext = createContext({});
 
 // TODO Set toAccount to first available currency if no accounts
-const initialState = {
+const initialState: State = {
   accounts,
   language: general.language,
   fromAccount: accounts.filter(
@@ -30,7 +52,7 @@ const initialState = {
   availableCurrencies: Currencies
 };
 
-const ExchangeReducer = (state, action) => {
+const ExchangeReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'toggle': {
       return { ...state, ...{ fromAccount: state.toAccount, toAccount: state.fromAccount } };
@@ -67,7 +89,7 @@ const ExchangeReducer = (state, action) => {
       };
     }
     case 'updateRate': {
-      return { ...state, ...{ rate: action.payload } };
+      return { ...state, ...{ rate: action.payload.rate } };
     }
     case 'updateAccount': {
       const { account, currency } = action.payload;
@@ -83,20 +105,22 @@ const ExchangeReducer = (state, action) => {
   }
 };
 
-const ExchangeProvider = ({ children }) => {
+const ExchangeProvider:FunctionComponent = ({ children }) => {
   const [state, dispatch] = useReducer(ExchangeReducer, initialState);
   const [callback, setCallback] = useState(null);
 
-  const getRate = async currency => {
+  const getRate = async (currency: string) => {
     const currentRate = await Request.get('https://api.exchangeratesapi.io/latest', { base: currency });
     return currentRate;
   };
 
-  const onReloadRate = useCallback(async (from, to) => {
+  const onReloadRate = useCallback(async (from: string, to: string) => {
     const rateData = await getRate(from);
     dispatch({
       type: 'updateRate',
-      payload: rateData.rates[to]
+      payload: {
+        rate: rateData.rates[to]
+      }
     });
   }, []);
 
@@ -119,6 +143,10 @@ const ExchangeProvider = ({ children }) => {
       </ExchangeDispatchContext.Provider>
     </ExchangeStateContext.Provider>
   );
+};
+
+ExchangeProvider.defaultProps = {
+  children: null
 };
 
 const useExchangeState = () => {

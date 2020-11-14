@@ -95,7 +95,7 @@ test('Covert currency on type from to to', async () => {
   const inputs = getAllByTestId('display-input');
   const currencyButtons = buttons.filter(btn => btn.classList.contains('btn--currency'));
   fireEvent.change(inputs[0], { target: { value: 1 } });
-  const toCurrency = currencyButtons.[1].innerHTML;
+  const toCurrency = currencyButtons[1].innerHTML;
   const rate = CurrenciesRates.rates[toCurrency];
   await waitFor(() => expect(inputs[1].value).toBe(`+ ${parseFloat(Currency.sortDecimal(1 * rate, 2))}`));
 });
