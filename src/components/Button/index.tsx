@@ -32,7 +32,9 @@ const Button:FunctionComponent<ButtonProps> = ({
 
 Button.defaultProps ={
   btnStyle: 'primary',
-  disabled: false
+  disabled: false,
+  handleClick: () => null,
+  label: null
 };
 
 export default Button;

@@ -9,7 +9,7 @@ import styles from './main.scss';
 const CurrencyExchange:FunctionComponent = () => {
   const [openOverlay, setOpenOverlay] = useState<boolean>(false);
   const [account, setAccount] = useState<string>(null);
-  const handleOpenOverlay = (acc: string) => {
+  const handleOpenOverlay = (acc: string): void => {
     setAccount(acc);
     setOpenOverlay(true);
   };

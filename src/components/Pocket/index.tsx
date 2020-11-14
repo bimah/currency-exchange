@@ -6,7 +6,7 @@ import Flag from '../Flag';
 
 type PocketProps = {
   currencyCode: string,
-  amount: number,
+  amount?: number,
   currencyName: string,
   handleCurrencyClick: (arg0: string) => void,
   disabled: boolean

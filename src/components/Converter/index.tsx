@@ -33,7 +33,7 @@ const Converter:FunctionComponent<ConverterProps>= ({ onCurrencyChange }) => {
     onInputChange(String(from), false);
   }, [rate]);
 
-  const handleUpdateAccounts = () => {
+  const handleUpdateAccounts = (): void => {
     dispatch({
       type: 'updateAccounts',
       payload: {

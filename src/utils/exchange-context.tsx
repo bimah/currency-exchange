@@ -7,7 +7,9 @@ import React, {
   useState,
   FunctionComponent,
   Context,
-  Provider
+  Provider,
+  Reducer,
+  ContextType
 } from 'react';
 
 import UserData from '../../settings/user-details.json';
@@ -35,8 +37,8 @@ type Action = {
   payload?: Record<string, any>
 };
 
-const ExchangeStateContext = createContext({});
-const ExchangeDispatchContext = createContext({});
+const ExchangeStateContext = createContext<State | undefined>(undefined);
+const ExchangeDispatchContext = createContext<any | undefined>(undefined);
 
 // TODO Set toAccount to first available currency if no accounts
 const initialState: State = {

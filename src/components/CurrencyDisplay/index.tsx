@@ -43,9 +43,9 @@ const CurrencyDisplay:FunctionComponent<CurrencyDisplayProps> = ({
     handleInputChange(formattedValue, add);
   };
 
-  const prefix = add ? '+' : '-';
-  const currencyInputValue = inputValue !== '' ? `${prefix} ${inputValue}` : inputValue;
-  const overBalance = !add && parseFloat(inputValue) > pocket.balance;
+  const prefix: string = add ? '+' : '-';
+  const currencyInputValue: string = inputValue !== '' ? `${prefix} ${inputValue}` : inputValue;
+  const overBalance: boolean = !add && parseFloat(inputValue) > pocket.balance;
 
   return (
     <div className={styles['currency-display']}>

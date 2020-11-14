@@ -37,10 +37,12 @@ const CurrenciesOverlay:FunctionComponent<CurrenciesOverlayProps> = ({
   const dispatch = useExchangeDispatch();
 
   const otherPockets = useMemo(() => {
-    const existingIds: string[] = accounts.map((ex: AccountProps) => ex.currency);
+    const existingIds: string[] = accounts.map((ex: AccountProps):string => ex.currency);
     const filteredList: Record<string, string> = { ...availableCurrencies };
 
-    existingIds.forEach((id: string) => delete filteredList[id]);
+    existingIds.forEach((id: string):void => {
+      delete filteredList[id];
+    });
 
     return filteredList;
   }, [accounts]);
